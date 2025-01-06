@@ -110,10 +110,7 @@ contract BitmaskSetOperationsTest is Test {
         uint256 b = 6; // Set {1,2} (binary: 0110)
         uint256 positions = 1;
         uint256 expected = 3; // Set {0,1} (binary: 0011) = rotateRight(1010,1) XOR 0110 = 0101 XOR 0110
-        assertEq(
-            setOps.rotateRightSymmetricDifference(a, b, positions),
-            expected
-        );
+        assertEq(setOps.rotateRightSymmetricDifference(a, b, positions), expected);
     }
 
     /// @notice Tests the clear elements operation

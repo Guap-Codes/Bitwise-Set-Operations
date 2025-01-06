@@ -24,33 +24,21 @@ contract SetOpsInvariants is Test {
     /// @notice Tests the idempotent law for intersection operation
     /// @param a The set to test
     function testIntersectionIdempotent(uint256 a) public {
-        assertEq(
-            setOps.intersection(a, a),
-            a,
-            "Intersection with self should equal self"
-        );
+        assertEq(setOps.intersection(a, a), a, "Intersection with self should equal self");
     }
 
     /// @notice Tests the commutative law for union operation
     /// @param a The first set to test
     /// @param b The second set to test
     function testUnionCommutative(uint256 a, uint256 b) public {
-        assertEq(
-            setOps.union(a, b),
-            setOps.union(b, a),
-            "Union should be commutative"
-        );
+        assertEq(setOps.union(a, b), setOps.union(b, a), "Union should be commutative");
     }
 
     /// @notice Tests the commutative law for intersection operation
     /// @param a The first set to test
     /// @param b The second set to test
     function testIntersectionCommutative(uint256 a, uint256 b) public {
-        assertEq(
-            setOps.intersection(a, b),
-            setOps.intersection(b, a),
-            "Intersection should be commutative"
-        );
+        assertEq(setOps.intersection(a, b), setOps.intersection(b, a), "Intersection should be commutative");
     }
 
     /// @notice Tests the associative law for union operation
@@ -59,9 +47,7 @@ contract SetOpsInvariants is Test {
     /// @param c The third set to test
     function testUnionAssociative(uint256 a, uint256 b, uint256 c) public {
         assertEq(
-            setOps.union(setOps.union(a, b), c),
-            setOps.union(a, setOps.union(b, c)),
-            "Union should be associative"
+            setOps.union(setOps.union(a, b), c), setOps.union(a, setOps.union(b, c)), "Union should be associative"
         );
     }
 
@@ -69,11 +55,7 @@ contract SetOpsInvariants is Test {
     /// @param a The first set to test
     /// @param b The second set to test
     /// @param c The third set to test
-    function testIntersectionAssociative(
-        uint256 a,
-        uint256 b,
-        uint256 c
-    ) public {
+    function testIntersectionAssociative(uint256 a, uint256 b, uint256 c) public {
         assertEq(
             setOps.intersection(setOps.intersection(a, b), c),
             setOps.intersection(a, setOps.intersection(b, c)),
@@ -85,11 +67,7 @@ contract SetOpsInvariants is Test {
     /// @param a The first set to test
     /// @param b The second set to test
     /// @param c The third set to test
-    function testDistributiveUnionOverIntersection(
-        uint256 a,
-        uint256 b,
-        uint256 c
-    ) public {
+    function testDistributiveUnionOverIntersection(uint256 a, uint256 b, uint256 c) public {
         assertEq(
             setOps.intersection(a, setOps.union(b, c)),
             setOps.union(setOps.intersection(a, b), setOps.intersection(a, c)),
@@ -101,11 +79,7 @@ contract SetOpsInvariants is Test {
     /// @param a The first set to test
     /// @param b The second set to test
     /// @param c The third set to test
-    function testDistributiveIntersectionOverUnion(
-        uint256 a,
-        uint256 b,
-        uint256 c
-    ) public {
+    function testDistributiveIntersectionOverUnion(uint256 a, uint256 b, uint256 c) public {
         assertEq(
             setOps.union(a, setOps.intersection(b, c)),
             setOps.intersection(setOps.union(a, b), setOps.union(a, c)),
@@ -116,11 +90,7 @@ contract SetOpsInvariants is Test {
     /// @notice Tests the double complement law
     /// @param a The set to test
     function testDoubleComplementLaw(uint256 a) public {
-        assertEq(
-            setOps.complement(setOps.complement(a)),
-            a,
-            "Double complement should equal self"
-        );
+        assertEq(setOps.complement(setOps.complement(a)), a, "Double complement should equal self");
     }
 
     /// @notice Tests DeMorgan's first law
@@ -150,10 +120,7 @@ contract SetOpsInvariants is Test {
     /// @param b The second set to test
     function testSubsetSupersetRelationship(uint256 a, uint256 b) public {
         if (setOps.isSubset(a, b)) {
-            assertTrue(
-                setOps.isSuperset(b, a),
-                "If A is subset of B, then B must be superset of A"
-            );
+            assertTrue(setOps.isSuperset(b, a), "If A is subset of B, then B must be superset of A");
         }
     }
 
@@ -171,10 +138,6 @@ contract SetOpsInvariants is Test {
     /// @notice Tests the property of symmetric difference with self
     /// @param a The set to test
     function testSymmetricDifferenceWithSelf(uint256 a) public {
-        assertEq(
-            setOps.symmetricDifference(a, a),
-            0,
-            "Symmetric difference with self should be empty set"
-        );
+        assertEq(setOps.symmetricDifference(a, a), 0, "Symmetric difference with self should be empty set");
     }
 }

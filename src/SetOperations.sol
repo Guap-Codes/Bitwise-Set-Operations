@@ -30,10 +30,7 @@ contract SetOperations {
     /// @param a First set represented as a bitmask
     /// @param b Second set represented as a bitmask
     /// @return result A bitmask representing all elements that are in both A and B
-    function intersection(
-        uint256 a,
-        uint256 b
-    ) public returns (uint256 result) {
+    function intersection(uint256 a, uint256 b) public returns (uint256 result) {
         result = bitmaskOps.bitwiseAnd(a, b);
     }
 
@@ -51,10 +48,7 @@ contract SetOperations {
     /// @param a First set represented as a bitmask
     /// @param b Second set represented as a bitmask
     /// @return result A bitmask representing all elements that are in either A or B, but not in both
-    function symmetricDifference(
-        uint256 a,
-        uint256 b
-    ) public returns (uint256 result) {
+    function symmetricDifference(uint256 a, uint256 b) public returns (uint256 result) {
         result = bitmaskOps.bitwiseXor(a, b);
     }
 
@@ -137,11 +131,7 @@ contract SetOperations {
     /// @param b The set to union with
     /// @param positions The number of positions to shift the first set to the left
     /// @return result A bitmask representing the union of the shifted first set and the second set
-    function shiftLeftUnion(
-        uint256 a,
-        uint256 b,
-        uint256 positions
-    ) public returns (uint256 result) {
+    function shiftLeftUnion(uint256 a, uint256 b, uint256 positions) public returns (uint256 result) {
         uint256 shifted = bitmaskOps.bitwiseShiftLeft(a, positions);
         result = bitmaskOps.bitwiseOr(shifted, b);
     }
@@ -152,11 +142,7 @@ contract SetOperations {
     /// @param b The set to intersect with
     /// @param positions The number of positions to shift the first set to the right
     /// @return result A bitmask representing the intersection of the shifted first set and the second set
-    function shiftRightIntersection(
-        uint256 a,
-        uint256 b,
-        uint256 positions
-    ) public returns (uint256 result) {
+    function shiftRightIntersection(uint256 a, uint256 b, uint256 positions) public returns (uint256 result) {
         uint256 shifted = bitmaskOps.bitwiseShiftRight(a, positions);
         result = bitmaskOps.bitwiseAnd(shifted, b);
     }
@@ -167,11 +153,7 @@ contract SetOperations {
     /// @param b The set to subtract
     /// @param positions The number of positions to rotate the first set to the left
     /// @return result A bitmask representing the difference of the rotated first set and the second set
-    function rotateLeftDifference(
-        uint256 a,
-        uint256 b,
-        uint256 positions
-    ) public returns (uint256 result) {
+    function rotateLeftDifference(uint256 a, uint256 b, uint256 positions) public returns (uint256 result) {
         uint256 rotated = bitmaskOps.bitwiseRotateLeft(a, positions);
         result = bitmaskOps.bitwiseAnd(rotated, bitmaskOps.bitwiseNot(b));
     }
@@ -182,11 +164,7 @@ contract SetOperations {
     /// @param b The set to compute symmetric difference with
     /// @param positions The number of positions to rotate the first set to the right
     /// @return result A bitmask representing the symmetric difference of the rotated first set and the second set
-    function rotateRightSymmetricDifference(
-        uint256 a,
-        uint256 b,
-        uint256 positions
-    ) public returns (uint256 result) {
+    function rotateRightSymmetricDifference(uint256 a, uint256 b, uint256 positions) public returns (uint256 result) {
         uint256 rotated = bitmaskOps.bitwiseRotateRight(a, positions);
         result = bitmaskOps.bitwiseXor(rotated, b);
     }
@@ -196,10 +174,7 @@ contract SetOperations {
     /// @param a The set to clear elements from
     /// @param mask The bitmask representing the elements to clear
     /// @return result A bitmask representing the set with the specified elements cleared
-    function clearElements(
-        uint256 a,
-        uint256 mask
-    ) public view returns (uint256 result) {
+    function clearElements(uint256 a, uint256 mask) public view returns (uint256 result) {
         result = bitmaskOps.bitwiseClear(a, mask);
     }
 
@@ -208,10 +183,7 @@ contract SetOperations {
     /// @param a The set to set elements in
     /// @param mask The bitmask representing the elements to set
     /// @return result A bitmask representing the set with the specified elements set
-    function setElements(
-        uint256 a,
-        uint256 mask
-    ) public view returns (uint256 result) {
+    function setElements(uint256 a, uint256 mask) public view returns (uint256 result) {
         result = bitmaskOps.bitwiseSet(a, mask);
     }
 
@@ -220,10 +192,7 @@ contract SetOperations {
     /// @param a The set to toggle elements in
     /// @param mask The bitmask representing the elements to toggle
     /// @return result A bitmask representing the set with the specified elements toggled
-    function toggleElements(
-        uint256 a,
-        uint256 mask
-    ) public view returns (uint256 result) {
+    function toggleElements(uint256 a, uint256 mask) public view returns (uint256 result) {
         result = bitmaskOps.bitwiseToggle(a, mask);
     }
 
@@ -233,11 +202,7 @@ contract SetOperations {
     /// @param start The starting position of the subset
     /// @param length The length of the subset
     /// @return result A bitmask representing the extracted subset
-    function extractSubset(
-        uint256 a,
-        uint256 start,
-        uint256 length
-    ) public view returns (uint256 result) {
+    function extractSubset(uint256 a, uint256 start, uint256 length) public view returns (uint256 result) {
         result = bitmaskOps.bitwiseExtract(a, start, length);
     }
 

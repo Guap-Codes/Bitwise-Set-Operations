@@ -64,10 +64,7 @@ contract BitmaskOperations {
     /// @param a Bitmask operand to be shifted
     /// @param positions Number of positions to shift left
     /// @return result The result of a << positions
-    function bitwiseShiftLeft(
-        uint256 a,
-        uint256 positions
-    ) public pure returns (uint256 result) {
+    function bitwiseShiftLeft(uint256 a, uint256 positions) public pure returns (uint256 result) {
         assembly {
             result := shl(positions, a)
         }
@@ -78,10 +75,7 @@ contract BitmaskOperations {
     /// @param a Bitmask operand to be shifted
     /// @param positions Number of positions to shift right
     /// @return result The result of a >> positions
-    function bitwiseShiftRight(
-        uint256 a,
-        uint256 positions
-    ) public pure returns (uint256 result) {
+    function bitwiseShiftRight(uint256 a, uint256 positions) public pure returns (uint256 result) {
         assembly {
             // Work with 4-bit window
             let window := 0xf
@@ -99,10 +93,7 @@ contract BitmaskOperations {
     /// @param a Bitmask operand to be rotated
     /// @param positions Number of positions to rotate left
     /// @return result The result of rotating a left by positions
-    function bitwiseRotateLeft(
-        uint256 a,
-        uint256 positions
-    ) public pure returns (uint256 result) {
+    function bitwiseRotateLeft(uint256 a, uint256 positions) public pure returns (uint256 result) {
         assembly {
             // Work with 8-bit window
             let window := 0xff
@@ -121,10 +112,7 @@ contract BitmaskOperations {
     /// @param a Bitmask operand to be rotated
     /// @param positions Number of positions to rotate right
     /// @return result The result of rotating a right by positions
-    function bitwiseRotateRight(
-        uint256 a,
-        uint256 positions
-    ) public pure returns (uint256 result) {
+    function bitwiseRotateRight(uint256 a, uint256 positions) public pure returns (uint256 result) {
         assembly {
             // Work with 4-bit window
             let window := 0xf
@@ -158,10 +146,7 @@ contract BitmaskOperations {
     /// @param a Bitmask to clear bits from
     /// @param mask Mask specifying bits to clear
     /// @return result The result of clearing bits in a
-    function bitwiseClear(
-        uint256 a,
-        uint256 mask
-    ) public pure returns (uint256 result) {
+    function bitwiseClear(uint256 a, uint256 mask) public pure returns (uint256 result) {
         assembly {
             result := and(a, not(mask))
         }
@@ -172,10 +157,7 @@ contract BitmaskOperations {
     /// @param a Bitmask to set bits in
     /// @param mask Mask specifying bits to set
     /// @return result The result of setting bits in a
-    function bitwiseSet(
-        uint256 a,
-        uint256 mask
-    ) public pure returns (uint256 result) {
+    function bitwiseSet(uint256 a, uint256 mask) public pure returns (uint256 result) {
         assembly {
             result := or(a, mask)
         }
@@ -186,10 +168,7 @@ contract BitmaskOperations {
     /// @param a Bitmask to toggle bits in
     /// @param mask Mask specifying bits to toggle
     /// @return result The result of toggling bits in a
-    function bitwiseToggle(
-        uint256 a,
-        uint256 mask
-    ) public pure returns (uint256 result) {
+    function bitwiseToggle(uint256 a, uint256 mask) public pure returns (uint256 result) {
         assembly {
             result := xor(a, mask)
         }
@@ -201,11 +180,7 @@ contract BitmaskOperations {
     /// @param start Starting position of the range (0-based)
     /// @param length Length of the range in bits
     /// @return result The extracted bit range
-    function bitwiseExtract(
-        uint256 a,
-        uint256 start,
-        uint256 length
-    ) public pure returns (uint256 result) {
+    function bitwiseExtract(uint256 a, uint256 start, uint256 length) public pure returns (uint256 result) {
         assembly {
             let mask := sub(shl(length, 1), 1)
             result := and(shr(start, a), mask)
@@ -221,11 +196,7 @@ contract BitmaskOperations {
             count := 256
             let mask := shl(255, 1) // Start with leftmost bit
 
-            for {
-                let i := 0
-            } lt(i, 256) {
-                i := add(i, 1)
-            } {
+            for { let i := 0 } lt(i, 256) { i := add(i, 1) } {
                 if and(a, mask) {
                     count := i
                     break
@@ -242,17 +213,9 @@ contract BitmaskOperations {
     function countTrailingZeros(uint256 a) public pure returns (uint256 count) {
         assembly {
             count := 0
-            for {
-                let i := 0
-            } lt(i, 256) {
-                i := add(i, 1)
-            } {
-                if iszero(and(shr(i, a), 1)) {
-                    count := add(count, 1)
-                }
-                if eq(and(shr(i, a), 1), 1) {
-                    break
-                }
+            for { let i := 0 } lt(i, 256) { i := add(i, 1) } {
+                if iszero(and(shr(i, a), 1)) { count := add(count, 1) }
+                if eq(and(shr(i, a), 1), 1) { break }
             }
         }
     }
